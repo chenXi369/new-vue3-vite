@@ -1,7 +1,11 @@
 # Vue 3 + Vite
+# 从 0 到 1 创建一个vue 3 + vite的项目
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+# 需要注意一些细节：
+# 基本的一些依赖和包的引入，例如：vue-router,pinia,cookie,axios等
 
-## Recommended IDE Setup
+# 开发依赖一定要注入 [@types/node] 然后去配置js/ts conifg.js,注入 @ 和 # 
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+# 创建环境变量，然后去vite.config.js配置代理
+
+# 然后对接口文件做一些封装即可运行项目

@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { getToken } from '@/utils/auth'
 import cache from '@/plugins/cache'
+import { showFailToast } from 'vant';
 
 // 创建实例
 const axiosInstance = axios.create({
@@ -13,7 +14,7 @@ axios.defaults.headers['Content-Type'] = 'application/json'
 // 添加请求拦截器
 axiosInstance.interceptors.request.use(function (config) {
   // 是否需要设置 token
-  const isToken = (config.headers || {}).isToken === false
+  // const isToken = (config.headers || {}).isToken === false
   // 是否需要防止数据重复提交
   const isRepeatSubmit = (config.headers || {}).repeatSubmit === false
 
@@ -56,17 +57,20 @@ axiosInstance.interceptors.request.use(function (config) {
         requestObj.time - s_time < interval &&
         s_url === requestObj.url
       ) {
-        const message = "数据正在处理，请勿重复提交";
-        console.warn(`[${s_url}]: ` + message);
-        return Promise.reject(new Error(message));
+        const message = '数据正在处理，请勿重复提交'
+        console.warn(`[${s_url}]: ` + message)
+        showFailToast(message)
+
+        return Promise.reject(new Error(message))
       } else {
-        cache.session.setJSON("sessionObj", requestObj);
+        cache.session.setJSON("sessionObj", requestObj)
       }
     }
   }
   return config
 }, function (error) {
   // 对请求错误做的操作
+  
   return Promise.reject(error)
 })
 
@@ -76,8 +80,8 @@ axiosInstance.interceptors.response.use(function (response) {
   // 对响应做的操作
   return response
 }, function (error) {
-  // 对超出2xx范围的状态码触发该函数
   // 对响应错误做的操作
+  showFailToast('服务器错误')
   return Promise.reject(error)
 })
 

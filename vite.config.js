@@ -26,7 +26,7 @@ export default defineConfig({
     host: '0.0.0.0',
     open: true,
     proxy: {
-      '/dev-api': {
+      '/test-api': {
         target: `http://192.168.1.216`,
         changeOrigin: true,
         pathRewrite: {

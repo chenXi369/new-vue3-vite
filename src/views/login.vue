@@ -17,9 +17,10 @@
 <script setup>
 import { ref } from 'vue'
 import { login } from '@/api/index'
+import router from '@/router'
 
 const username = ref('mz4.0')
-const password = ref('123456')
+const password = ref('Aa123456')
 
 const onSubmit = (values) => {
   const data = {
@@ -30,6 +31,9 @@ const onSubmit = (values) => {
   }
   login(data).then(res => {
     console.log(res.data)
+    router.push({
+      path: '/'
+    })
   }).catch((err) => {
     console.log(err)
   })
